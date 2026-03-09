@@ -24,12 +24,12 @@ A simple Bash script for macOS that moves a file from your Downloads folder into
    ```
 3. Run it:
    ```bash
-   ./cv_archiver.sh
+   ./file_archiver.sh
    ```
 
 ## Automation (Optional)
 
-You can schedule the script to run automatically using a macOS Launch Agent or a cron job.
+You can schedule the script to run automatically using a macOS Launch Agent or a cron job. In my case I found it easier to use cron job.
 
 ## Requirements
 
