@@ -22,11 +22,11 @@ The file extension is auto-detected from the source path, so the script works wi
    ```
 2. Make the script executable:
    ```bash
-   chmod +x cv_archiver.sh
+   chmod +x file_archiver.sh
    ```
 3. Run it:
    ```bash
-   ./cv_archiver.sh
+   ./file_archiver.sh
    ```
 
 ## Automation (Optional)
