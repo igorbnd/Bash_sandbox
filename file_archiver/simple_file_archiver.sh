@@ -1,13 +1,19 @@
 #!/bin/bash
+set -euo pipefail
 
-# ==== Simple script that moves a particular file to aother specified directory ====
+# ==== Simple script that moves a particular file to aother specified directory and logging in log.txt ====
 
 # === Configuration - change paths as per your need ===
-SOURCE="/Users/your_username/downloads/your_file.pdf"
+FILENAME="your_file"
+SOURCE="/Users/your_username/downloads/${FILENAME}"
 DEST_DIR="/Users/your_username/documents/file_archive"
 
-DATE=$(date +"%Y-%m-%d")
-TIME=$(date +"%H%M")
+FILENAME="${SOURCE##*/}"
+EXT="${FILENAME##*.}"
+BASENAME="${FILENAME%.*}"
+
+TIMESTAMP=$(date +"%Y-%m-%d_%H%M")
+DATE="${TIMESTAMP%%_*}"
 
 mkdir -pv "$DEST_DIR"
 
@@ -19,13 +25,13 @@ else
 fi
 
 if [ -f "$SOURCE" ]; then
-    mv -v "$SOURCE" "$DEST_DIR/your_file_${DATE}_${TIME}.pdf"
-    MSG="✅ File found and moved to archive as your_file_${DATE}_${TIME}.pdf"
-    echo "$DATE, $TIME: one file moved to archive directory: $DEST_DIR" >> "$DEST_DIR/log.txt"
+    mv -v "$SOURCE" "$DEST_DIR/${BASENAME}_${TIMESTAMP}.${EXT}"
+    MSG="✅ File found and moved to archive as ${BASENAME}_${TIMESTAMP}.${EXT}"
+    echo "$TIMESTAMP: one file moved to archive directory: $DEST_DIR" >> "$DEST_DIR/log.txt"
 else
-    MSG="ℹ️ No file your_file.pdf was found in Downloads today."
-    echo "$DATE, $TIME: no file moved to archive directory: $DEST_DIR" >> "$DEST_DIR/log.txt"
+    MSG="ℹ️ No file ${FILENAME} was found in the source directory today."
+    echo "$TIMESTAMP: no file moved to archive directory: $DEST_DIR" >> "$DEST_DIR/log.txt"
 fi
 
-# for macOS notification
-osascript -e "display notification \"$MSG\" with title \"File Archiver\""
+# macOS notification (skipped if osascript is unavailable)
+command -v osascript &>/dev/null && osascript -e "display notification \"$MSG\" with title \"File Archiver\""
