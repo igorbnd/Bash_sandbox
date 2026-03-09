@@ -11,9 +11,11 @@ A simple Bash script for macOS that moves a file from your Downloads folder into
    - **If not found** — logs that no file was available.
 4. Sends a macOS notification with the result.
 
+The file extension is auto-detected from the source path, so the script works with any file type — `.pdf`, `.docx`, `.png`, etc.
+
 ## Setup
 
-1. Edit the two variables at the top of the script to match your environment:
+1. Edit the `SOURCE` and `DEST_DIR` variables at the top of the script to match your environment:
    ```bash
    SOURCE="/Users/your_username/downloads/your_file.pdf"
    DEST_DIR="/Users/your_username/documents/file_archive"
@@ -24,14 +26,14 @@ A simple Bash script for macOS that moves a file from your Downloads folder into
    ```
 3. Run it:
    ```bash
-   ./file_archiver.sh
+   ./cv_archiver.sh
    ```
 
 ## Automation (Optional)
 
-You can schedule the script to run automatically using a macOS Launch Agent or a cron job. In my case I found it easier to use cron job.
+You can schedule the script to run automatically using a macOS Launch Agent or a cron job. In my case I find cron job is the easier option.
 
 ## Requirements
 
-- macOS (uses `osascript` for native notifications)
+- macOS (uses `osascript` for native notifications; skipped gracefully on other systems)
 - Bash
