@@ -51,7 +51,7 @@ echo "Update started at: $(date)"
 echo "This may take a few minutes..."
 
 # Notify Start
-send_notification "🚀 Update started on $HOSTNAME"
+send_notification "$(date) -- 🚀 Update started on $HOSTNAME"
 
 apt update -y
 apt upgrade -y
