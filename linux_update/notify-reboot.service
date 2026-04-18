@@ -1,0 +1,12 @@
+[Unit]
+Description=Send notification after reboot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 30
+ExecStart=/path/to/notify_boot.sh  # path to the script
+
+[Install]
+WantedBy=multi-user.target
